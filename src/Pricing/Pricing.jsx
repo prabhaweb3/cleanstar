@@ -108,7 +108,7 @@ const Pricing = () => {
       {pricingData.map((data, index) => (
         <div key={index} className="pricing-card-item">
           <div className="pricing-image-placeholder">
-            <Image src={data.src} />
+            <Image src={data.src} alt="Image not found" />
           </div>
           <h2 className="pricing-amount">${data.price}</h2>
           <h3 className="pricing-plan-title">{data.title}</h3>
