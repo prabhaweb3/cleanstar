@@ -55,8 +55,8 @@ const Navbar = ({ text1, text2, path1, path2 }) => {
                         </div>
 
                         <div className={styles.infoItem}>
-                            <div className={styles.infoSubItem} style={{ margin:"-45px"}}>
-                                <Image src={logo} alt="Logo" width={130} />
+                            <div className={styles.infoSubItem} style={{ margin:"-45px",display:"flex",justifyContent:"center",alignItems:"center",width:"100%",marginLeft:0}}>
+                                <Image src={logo} alt="Logo" width={160} />
                             </div>
                         </div>
 
