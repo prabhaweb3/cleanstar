@@ -124,6 +124,17 @@ const pricingData = [
     },
   ];
 
+  const services = [
+    { value: "Grease Trap Cleaning", label: "Grease Trap Cleaning" },
+    { value: "Drain Line Jetting", label: "Drain Line Jetting" },
+    { value: "Sump Pit Cleaning", label: "Sump Pit Cleaning" },
+    { value: "Sewage Water Removing", label: "Sewage Water Removing" },
+    { value: "Lift Station Cleaning", label: "Lift Station Cleaning" },
+    { value: "Grease Trap Supply & Installation", label: "Grease Trap Supply & Installation" },
+    { value: "Kitchen Duct Cleaning", label: "Kitchen Duct Cleaning" },
+    { value: "Water Tank Cleaning", label: "Water Tank Cleaning" },
+  ];
+
   return (
     <div>
       <Navbar />
@@ -149,10 +160,11 @@ const pricingData = [
             <input type="text" placeholder="Your Name" />
             <input type="number" placeholder="Phone Number" />
             <select>
-              <option>Service Name</option>
-              <option>Commercial Service</option>
-              <option>Residential Service</option>
-              <option>Industrial Service</option>
+              {
+                services.map((val,ind)=>{
+                  return <option key={ind} value={val.value}>{val.label}</option>
+                })
+              }
             </select>
             <input type="submit" value="Submit Now" />
           </div>
