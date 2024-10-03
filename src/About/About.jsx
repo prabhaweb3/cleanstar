@@ -34,7 +34,7 @@ const About= () => {
           <div className="section-title"><span>About </span> our Company</div>
           <div className="title">Our Success <br /> Cleaning Up your Mess</div>
             <p className="about-description">
-              Can consent to the use of such technologies by closing this notice senectus amet sodales habitant dapibus.
+            At Clean star tanks, containers & crates cleaning services est, we are dedicated to providing top-quality, reliable cleaning solutions for a diverse range of clients across uae. With years of experience in the industry, we specialize in maintaining and servicing essential infrastructure, from residential and commercial water tanks to.
             </p>
           </div>
           <div className="about-services">

@@ -171,8 +171,7 @@ const pricingData = [
             </div>
             <div className="about-subtitle">Our Success Cleaning<br /> Up Your Mess</div>
             <div className="about-description">
-              Can consent to the use of such technologies by closing this notice senectus amet sodales habitant dapibus
-            </div>
+            At Clean star tanks, containers & crates cleaning services est, we are dedicated to providing top-quality, reliable cleaning solutions for a diverse range of clients across uae. With years of experience in the industry, we specialize in maintaining and servicing essential infrastructure, from residential and commercial water tanks to.</div>
             <div className="service-outer">
             {servicesData.slice(0, 2).map((service, index) => (
               <div className="service" key={index}>
