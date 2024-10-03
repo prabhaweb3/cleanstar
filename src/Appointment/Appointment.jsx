@@ -4,6 +4,7 @@ import styles from "./Appointment.module.css"; // Importing CSS module
 import Navbar from "@/Navbar/Navbar";
 import { FaCalendarCheck, FaDatabase, FaBroom, FaPlay } from "react-icons/fa"; // Importing icons from react-icons
 
+
 const Appointment = () => {
   const steps = [
     { title: "Book Online", description: "Coingue aten lorem consqua interdum pretium liguala a semper mauris easy dicta.", icon: <FaCalendarCheck /> },
@@ -75,7 +76,7 @@ const AppointmentForm = () => {
     if (Object.keys(validationErrors).length === 0) {
       setLoading(true); // Start loading state
       try {
-        const response = await fetch("https://your-api-endpoint.com/appointments", {
+        const response = await fetch("https://prabhatech.com/cleanstar_backend/contacts/create", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(formData),

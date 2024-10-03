@@ -18,6 +18,52 @@ import service4 from '../../assets/service4.jpg';
 import Link from 'next/link';
 
 const HomeScreen = () => {
+
+  const [formData, setFormData] = useState({
+    name: '',
+    phoneNumber: '',
+    selectedService: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Post the data
+    try {
+      const response = await fetch('http://your-api-url.com/endpoint', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData) // Send form data as JSON
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log('Form successfully submitted:', result);
+        // Optionally, reset form after successful submission
+        setFormData({
+          name: '',
+          phoneNumber: '',
+          selectedService: ''
+        });
+      } else {
+        console.error('Error submitting form:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
   const servicesData = [
     {
         title: "Grease Trap Cleaning",
@@ -166,23 +212,38 @@ const pricingData = [
             <button className="learn-more-btn" ><Link href="/Services" style={{textDecoration:"none"}} >Learn More</Link></button>
           </div>
           <div className="slide1right">
-            <Image src={rightImage} alt="Image not found" layout="responsive" />
+            <Image className='slide1RightImg' src={rightImage} alt="Image not found" layout="responsive" />
           </div>
         </div>
 
         <div className="online-appointment">
           <div className="appointment-inputs">
             <span className="appointment-title">Online Appointment</span>
-            <input type="text" placeholder="Your Name" />
-            <input type="number" placeholder="Phone Number" />
-            <select>
-              {
-                services.map((val,ind)=>{
-                  return <option key={ind} value={val.value}>{val.label}</option>
-                })
-              }
-            </select>
-            <input type="submit" value="Submit Now" />
+            <form onSubmit={handleSubmit}>
+              <input type="text"
+              name="name" 
+        placeholder="Your Name" 
+        value={formData.name} 
+        onChange={handleChange} 
+        required/>
+              <input type="number" name="phoneNumber" 
+        placeholder="Phone Number" 
+        value={formData.phoneNumber} 
+        onChange={handleChange} 
+        required/>
+              <select
+              name="selectedService" 
+              value={formData.selectedService} 
+              onChange={handleChange} 
+              required>
+                {
+                  services.map((val,ind)=>{
+                    return <option key={ind} value={val.value}>{val.label}</option>
+                  })
+                }
+              </select>
+              <input type="submit" value="Submit Now" />
+              </form>
           </div>
         </div>
 
@@ -199,12 +260,11 @@ const pricingData = [
             </div>
             <div className="about-subtitle">Our Success Cleaning<br /> Up Your Mess</div>
             <div className="about-description">
-              Can consent to the use of such technologies by closing this notice senectus amet sodales habitant dapibus
-            </div>
+            At clean star tanks, containers & crates cleaning services est, we are dedicated to providing top-quality, reliable cleaning solutions for a diverse range of clients across uae. With years of experience in the industry, we specialize in maintaining and servicing essential infrastructure, from residential and commercial water tanks to industrial sewage treatment facilities.
+           </div>
             <div className="service-outer">
-            {servicesData.slice(0, 2).map((service, index) => (
+            {servicesData.slice(0, 4).map((service, index) => (
               <div className="service" key={index}>
-                <div className="service-icon">{service.icon}</div>
                 <div className="service-title">{service.title}</div>
                 <div className="service-description">{service.description}</div>
               </div>
@@ -214,15 +274,19 @@ const pricingData = [
         </div>
 
         <div className="banner">
-          <Image src={brand1} alt="not found" />
-          <Image src={brand2} alt="not found" />
-          <Image src={brand1} alt="not found" />
-          <Image src={brand2} alt="not found" />
-          <Image src={brand1} alt="not found" />
-          <Image src={brand2} alt="not found" />
-          <Image src={brand1} alt="not found" />
-          <Image src={brand2} alt="not found" />
-        </div>
+  <div className="bannerScroll">
+    <Image src={brand1} alt="not found" />
+    <Image src={brand2} alt="not found" />
+    <Image src={brand1} alt="not found" />
+    <Image src={brand2} alt="not found" />
+    <Image src={brand2} alt="not found" />
+    <Image src={brand2} alt="not found" />
+    <Image src={brand1} alt="not found" />
+    <Image src={brand2} alt="not found" />
+    <Image src={brand1} alt="not found" />
+    <Image src={brand2} alt="not found" />
+  </div>
+</div>
 
         <div className='our-success'>
           <div><span>Our </span> Popular Services</div>

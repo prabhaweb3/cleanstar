@@ -31,7 +31,7 @@ const Contact = () => {
         setError(null); // Reset error state
 
         // Send data to the backend
-        fetch('https://prabhatech.com/cleanstar_backend/contacts/add', {
+        fetch('https://prabhatech.com/cleanstar_backend/contacts/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json', // Specify the content type

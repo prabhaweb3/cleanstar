@@ -31,6 +31,32 @@
     margin-bottom: 10px;
 }
 
+
+@keyframes slideFromRight {
+    0% {
+      transform: translateX(100%); /* Start from the right side (off-screen) */
+      opacity: 0;
+    }
+    50% {
+      opacity: 1; /* Fade in */
+    }
+    100% {
+      transform: translateX(0); /* End at the center */
+      opacity: 1;
+    }
+  }
+  
+  .slide1right {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .slide1RightImg {
+    animation: slideFromRight 2.2s ease-in-out forwards;
+    /* Adjust timing and easing function as needed */
+  }
+  
+
 .sub-head {
     font-size: 1rem;
     font-weight: 500;
@@ -149,8 +175,9 @@
     border: none;
     border-radius: 5px;
     font-size: 1rem;
-    width: 100%;
+    width: 23%;
     height: 50px;
+    margin: 0 3px;
 }
 
 .appointment-inputs input[type="submit"] {
@@ -251,6 +278,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 .banner {
     background-color: #075f33;
@@ -263,9 +291,28 @@
     gap: 40px;
     width: 100%;
     padding: 0 90px;
-    overflow-x: auto; /* changed to auto for better control */
     scrollbar-width: none; /* for Firefox */
+    overflow: hidden;
 }
+.banner img {
+    width: auto;
+    height: 100px; /* Set image height */
+    margin-right: 20px; /* Space between images */
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0); /* Start from the first image */
+    }
+    100% {
+      transform: translateX(-50%); /* Move the first set of images out of view */
+    }
+  }
+  
+  .bannerScroll {
+    display: inline-flex;
+    animation: scroll 20s linear infinite; /* Apply the scroll animation */
+  }
 
 .banner::-webkit-scrollbar {
     display: none; /* for Chrome, Safari, and Edge */
@@ -279,7 +326,7 @@
 
 .service {
     margin-bottom: 20px;
-    flex: 1 1 100%;
+    width: 50% !important;
 }
 
 .service-title {
@@ -676,6 +723,16 @@ align-items: center;
     .project-header > div:nth-child(2) {
         font-size: 1.8rem; /* Adjust font size for mobile screens */
     }
+    .appointment-inputs input,
+.appointment-inputs select {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    width: 100%;
+    height: 50px;
+    margin: 3px 0;
+}
 }
 
 /* Individual Project Card */
