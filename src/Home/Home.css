@@ -547,7 +547,7 @@ align-items: center;
     border-radius: 50%;
     background-color: white;
     width: max-content;
-    height: auto;
+    height: max-content;
     padding: 1rem;
 }
 

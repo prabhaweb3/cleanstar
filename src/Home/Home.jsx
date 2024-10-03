@@ -7,7 +7,7 @@ import expert from '../../assets/expert.jpg';
 import aboutImage from '../../assets/about1.jpg';
 import brand1 from '../../assets/brand1.png';
 import brand2 from '../../assets/brand2.png';
-import { FaHome, FaBuilding, FaIndustry, FaHammer } from 'react-icons/fa'; // Importing icons
+import { FaHome, FaBuilding, FaIndustry, FaHammer,FaWrench } from 'react-icons/fa'; // Importing icons
 import React ,{useState} from 'react';
 import testimonial from '../../assets/testimonial.jpg';
 import feedback1 from '../../assets/feedback1.jpg';
@@ -15,41 +15,57 @@ import service1 from '../../assets/service1.jpg';
 import service2 from '../../assets/service2.jpg';
 import service3 from '../../assets/service3.jpg';
 import service4 from '../../assets/service4.jpg';
+import Link from 'next/link';
 
 const HomeScreen = () => {
   const servicesData = [
-    
+    {
+        title: "Grease Trap Cleaning",
+        description: "Professional grease trap cleaning to ensure efficient waste management and compliance with health standards.",
+        icon: <FaWrench />, // Replace with a specific icon for grease trap cleaning
+    },
+    {
+        title: "Drain Line Jetting",
+        description: "High-pressure water jetting services for clearing blocked drain lines and restoring proper flow.",
+        icon: <FaWrench />, // Replace with a specific icon for drain line jetting
+    },
+    {
+        title: "Sump Pit Cleaning",
+        description: "Comprehensive cleaning of sump pits to prevent flooding and ensure proper drainage.",
+        icon: <FaWrench />, // Replace with a specific icon for sump pit cleaning
+    },
     {
       title: "Industrial Cleaning Services",
       description: "Expert cleaning services for factories and large facilities, ensuring compliance with safety regulations.",
       icon: <FaIndustry />,
+  },
+    {
+        title: "Sewage Water Removing",
+        description: "Safe and effective removal of sewage water to protect your property and health.",
+        icon: <FaWrench />, // Replace with a specific icon for sewage water removal
     },
     {
-      title: "Post-Construction Cleaning",
-      description: "Thorough cleaning after construction or renovation, removing dust and debris for a pristine finish.",
-      icon: <FaHammer />,
+        title: "Lift Station Cleaning",
+        description: "Expert cleaning of lift stations to maintain optimal performance and prevent failures.",
+        icon: <FaWrench />, // Replace with a specific icon for lift station cleaning
     },
     {
-      title: "Deep Cleaning Services",
-      description: "Comprehensive cleaning that tackles dirt and grime in hard-to-reach areas, ensuring a fresh environment.",
-      icon: <FaHome />, // You can replace this with a different icon if needed
+        title: "Grease Trap Supply & Installation",
+        description: "Supply and installation of high-quality grease traps for effective waste management.",
+        icon: <FaWrench />, // Replace with a specific icon for grease trap supply & installation
     },
     {
-      title: "Office Sanitization Services",
-      description: "Regular sanitization services to maintain a hygienic workspace and promote employee health.",
-      icon: <FaBuilding />,
+        title: "Kitchen Duct Cleaning",
+        description: "Thorough cleaning of kitchen ducts to improve air quality and reduce fire risks.",
+        icon: <FaWrench />, // Replace with a specific icon for kitchen duct cleaning
     },
     {
-      title: "Eco-Friendly Cleaning Services",
-      description: "Cleaning services using environmentally friendly products to minimize ecological impact.",
-      icon: <FaIndustry />, // You can replace this with a different icon if needed
+        title: "Water Tank Cleaning",
+        description: "Professional cleaning of water tanks to ensure safe and clean water supply.",
+        icon: <FaWrench />, // Replace with a specific icon for water tank cleaning
     },
-    {
-      title: "Window Cleaning Services",
-      description: "Streak-free window cleaning for residential and commercial properties to enhance curb appeal.",
-      icon: <FaHammer />, // You can replace this with a different icon if needed
-    },
-  ];
+];
+
 
 const pricingData = [
   {
@@ -147,7 +163,7 @@ const pricingData = [
               <div className="main-head-s2">Excellence</div>
               <div className="main-head-s3">Guaranteed!</div>
             </div>
-            <button className="learn-more-btn">Learn More</button>
+            <button className="learn-more-btn" ><Link href="/Services" style={{textDecoration:"none"}} >Learn More</Link></button>
           </div>
           <div className="slide1right">
             <Image src={rightImage} alt="Image not found" layout="responsive" />

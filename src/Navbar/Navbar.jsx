@@ -41,7 +41,7 @@ const Navbar = ({ text1, text2, path1, path2 }) => {
                 <div className={`${styles.topBar} ${styles.customTopBar}`}>
                     <div className={styles.contactInfo}>
                         <div className={styles.infoItem}>
-                            <div className={styles.infoSubItem}>
+                            <div className={styles.infoSubItem} >
                                 <FaMapMarkerAlt className={styles.icon} /> Free Contact
                             </div>
                             <div className={styles.infoSubItem}>  Deira, Dubai, UAE</div>
@@ -68,7 +68,7 @@ const Navbar = ({ text1, text2, path1, path2 }) => {
                         </div>
 
                         <div className={styles.infoItem}>
-                            <button className={styles.infoItemBtn}>Free Quote</button>
+                            <button className={styles.infoItemBtn}><Link href="/Contact" style={{textDecoration:"none"}}>Free Quote</Link></button>
                         </div>
                     </div>
                 </div>
@@ -87,7 +87,7 @@ const Navbar = ({ text1, text2, path1, path2 }) => {
                     </ul>
                     {isSticky && (
                         <div className={styles.quoteBtn}>
-                            <button className={styles.customQuoteButton}>Free Quote</button>
+                            <button className={styles.customQuoteButton}><Link href="/Contact" style={{textDecoration:"none"}}>Free Quote</Link></button>
                         </div>
                     )}
                     <div className={styles.menuIcon} onClick={() => { /* Your mobile menu toggle logic */ }}>
