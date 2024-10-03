@@ -4,6 +4,7 @@ import styles from "./Appointment.module.css"; // Importing CSS module
 import Navbar from "@/Navbar/Navbar";
 import { FaCalendarCheck, FaDatabase, FaBroom, FaPlay } from "react-icons/fa"; // Importing icons from react-icons
 
+
 const Appointment = () => {
   const steps = [
     { title: "Book Online", description: "Coingue aten lorem consqua interdum pretium liguala a semper mauris easy dicta.", icon: <FaCalendarCheck /> },
@@ -42,14 +43,16 @@ const Appointment = () => {
 
 const AppointmentForm = () => {
   const [formData, setFormData] = useState({
-    name1: "",
-    name2: "",
+    fullname: "", // Changed from name1 to fullname
+    email: "",    // Changed from name2 to email
     service: "",
     message: "",
   });
 
   const [errors, setErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false); // Loading state for the submission
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -58,50 +61,52 @@ const AppointmentForm = () => {
 
   const validateForm = () => {
     let tempErrors = {};
-    if (!formData.name1) tempErrors.name1 = "Name is required.";
-    if (!formData.name2) tempErrors.name2 = "Name is required.";
+    if (!formData.fullname) tempErrors.fullname = "Full name is required."; 
+    if (!formData.email) tempErrors.email = "Email is required."; // Updated error message
     if (!formData.service) tempErrors.service = "Please choose a service.";
     if (!formData.message) tempErrors.message = "Message is required.";
     return tempErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validateForm();
     setErrors(validationErrors);
+    
     if (Object.keys(validationErrors).length === 0) {
-      setIsSubmitted(true);
+      setLoading(true); // Start loading state
+      try {
+        const response = await fetch("https://prabhatech.com/cleanstar_backend/contacts/create", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        });
+
+        if (response.ok) {
+          setSuccessMessage("Appointment booked successfully!"); // Set success message
+          // Reset form after submission
+          setFormData({ fullname: "", email: "", service: "", message: "" });
+        } else {
+          setErrors({ submit: "Error submitting form." });
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        setErrors({ submit: "Network error." });
+      } finally {
+        setLoading(false); // End loading state
+      }
     }
   };
 
-  useEffect(() => {
-    if (isSubmitted) {
-      const postData = async () => {
-        try {
-          const response = await fetch("https://your-api-endpoint.com/appointments", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formData),
-          });
-          if (response.ok) {
-            alert("Form submitted successfully!");
-          } else {
-            alert("Error submitting form.");
-          }
-        } catch (error) {
-          console.error("Error:", error);
-        }
-      };
-      postData();
-      setIsSubmitted(false);
-    }
-  }, [isSubmitted, formData]);
-
   const services = [
-    { value: "service1", label: "House Cleaning" },
-    { value: "service2", label: "Office Cleaning" },
-    { value: "service3", label: "Kitchen Cleaning" },
-    { value: "service4", label: "Club Cleaning" },
+    { value: "Grease Trap Cleaning", label: "Grease Trap Cleaning" },
+    { value: "Drain Line Jetting", label: "Drain Line Jetting" },
+    { value: "Sump Pit Cleaning", label: "Sump Pit Cleaning" },
+    { value: "Sewage Water Removing", label: "Sewage Water Removing" },
+    { value: "Lift Station Cleaning", label: "Lift Station Cleaning" },
+    { value: "Grease Trap Supply & Installation", label: "Grease Trap Supply & Installation" },
+    { value: "Kitchen Duct Cleaning", label: "Kitchen Duct Cleaning" },
+    { value: "Water Tank Cleaning", label: "Water Tank Cleaning" },
   ];
 
   return (
@@ -111,22 +116,22 @@ const AppointmentForm = () => {
         <input
           className={styles.input}
           type="text"
-          name="name1"
-          value={formData.name1}
+          name="fullname" // Updated name attribute
+          value={formData.fullname} // Updated state
           onChange={handleChange}
-          placeholder="Enter Name"
+          placeholder="Enter Full Name" // Updated placeholder
         />
-        {errors.name1 && <p className={styles.error}>{errors.name1}</p>}
+        {errors.fullname && <p className={styles.error}>{errors.fullname}</p>} 
 
         <input
           className={styles.input}
-          type="text"
-          name="name2"
-          value={formData.name2}
+          type="email" // Updated input type to email for better validation
+          name="email" // Updated name attribute
+          value={formData.email} // Updated state
           onChange={handleChange}
-          placeholder="Enter Name"
+          placeholder="Enter Email" // Updated placeholder
         />
-        {errors.name2 && <p className={styles.error}>{errors.name2}</p>}
+        {errors.email && <p className={styles.error}>{errors.email}</p>} 
 
         <select
           className={styles.select}
@@ -135,12 +140,11 @@ const AppointmentForm = () => {
           onChange={handleChange}
         >
           <option value="">Select a Service</option>
-          {
-            services.map((val,ind)=>{
-                return <option key={ind} value={val.value}>{val.label}</option>
-
-            })
-          }
+          {services.map((val, ind) => (
+            <option key={ind} value={val.value}>
+              {val.label}
+            </option>
+          ))}
         </select>
         {errors.service && <p className={styles.error}>{errors.service}</p>}
 
@@ -154,8 +158,11 @@ const AppointmentForm = () => {
         />
         {errors.message && <p className={styles.error}>{errors.message}</p>}
 
-        <button className={styles.button} type="submit">
-          Submit
+        {errors.submit && <p className={styles.error}>{errors.submit}</p>}
+        {successMessage && <p className={styles.success}>{successMessage}</p>}
+
+        <button className={styles.button} type="submit" disabled={loading}>
+          {loading ? "Submitting..." : "Submit"}
         </button>
       </form>
     </div>

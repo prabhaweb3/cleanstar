@@ -7,7 +7,7 @@ import expert from '../../assets/expert.jpg';
 import aboutImage from '../../assets/about1.jpg';
 import brand1 from '../../assets/brand1.png';
 import brand2 from '../../assets/brand2.png';
-import { FaHome, FaBuilding, FaIndustry, FaHammer } from 'react-icons/fa'; // Importing icons
+import { FaHome, FaBuilding, FaIndustry, FaHammer,FaWrench } from 'react-icons/fa'; // Importing icons
 import React ,{useState} from 'react';
 import testimonial from '../../assets/testimonial.jpg';
 import feedback1 from '../../assets/feedback1.jpg';
@@ -15,41 +15,103 @@ import service1 from '../../assets/service1.jpg';
 import service2 from '../../assets/service2.jpg';
 import service3 from '../../assets/service3.jpg';
 import service4 from '../../assets/service4.jpg';
+import Link from 'next/link';
 
 const HomeScreen = () => {
+
+  const [formData, setFormData] = useState({
+    name: '',
+    phoneNumber: '',
+    selectedService: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Post the data
+    try {
+      const response = await fetch('http://your-api-url.com/endpoint', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData) // Send form data as JSON
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log('Form successfully submitted:', result);
+        // Optionally, reset form after successful submission
+        setFormData({
+          name: '',
+          phoneNumber: '',
+          selectedService: ''
+        });
+      } else {
+        console.error('Error submitting form:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
   const servicesData = [
-    
+    {
+        title: "Grease Trap Cleaning",
+        description: "Professional grease trap cleaning to ensure efficient waste management and compliance with health standards.",
+        icon: <FaWrench />, // Replace with a specific icon for grease trap cleaning
+    },
+    {
+        title: "Drain Line Jetting",
+        description: "High-pressure water jetting services for clearing blocked drain lines and restoring proper flow.",
+        icon: <FaWrench />, // Replace with a specific icon for drain line jetting
+    },
+    {
+        title: "Sump Pit Cleaning",
+        description: "Comprehensive cleaning of sump pits to prevent flooding and ensure proper drainage.",
+        icon: <FaWrench />, // Replace with a specific icon for sump pit cleaning
+    },
     {
       title: "Industrial Cleaning Services",
       description: "Expert cleaning services for factories and large facilities, ensuring compliance with safety regulations.",
       icon: <FaIndustry />,
+  },
+    {
+        title: "Sewage Water Removing",
+        description: "Safe and effective removal of sewage water to protect your property and health.",
+        icon: <FaWrench />, // Replace with a specific icon for sewage water removal
     },
     {
-      title: "Post-Construction Cleaning",
-      description: "Thorough cleaning after construction or renovation, removing dust and debris for a pristine finish.",
-      icon: <FaHammer />,
+        title: "Lift Station Cleaning",
+        description: "Expert cleaning of lift stations to maintain optimal performance and prevent failures.",
+        icon: <FaWrench />, // Replace with a specific icon for lift station cleaning
     },
     {
-      title: "Deep Cleaning Services",
-      description: "Comprehensive cleaning that tackles dirt and grime in hard-to-reach areas, ensuring a fresh environment.",
-      icon: <FaHome />, // You can replace this with a different icon if needed
+        title: "Grease Trap Supply & Installation",
+        description: "Supply and installation of high-quality grease traps for effective waste management.",
+        icon: <FaWrench />, // Replace with a specific icon for grease trap supply & installation
     },
     {
-      title: "Office Sanitization Services",
-      description: "Regular sanitization services to maintain a hygienic workspace and promote employee health.",
-      icon: <FaBuilding />,
+        title: "Kitchen Duct Cleaning",
+        description: "Thorough cleaning of kitchen ducts to improve air quality and reduce fire risks.",
+        icon: <FaWrench />, // Replace with a specific icon for kitchen duct cleaning
     },
     {
-      title: "Eco-Friendly Cleaning Services",
-      description: "Cleaning services using environmentally friendly products to minimize ecological impact.",
-      icon: <FaIndustry />, // You can replace this with a different icon if needed
+        title: "Water Tank Cleaning",
+        description: "Professional cleaning of water tanks to ensure safe and clean water supply.",
+        icon: <FaWrench />, // Replace with a specific icon for water tank cleaning
     },
-    {
-      title: "Window Cleaning Services",
-      description: "Streak-free window cleaning for residential and commercial properties to enhance curb appeal.",
-      icon: <FaHammer />, // You can replace this with a different icon if needed
-    },
-  ];
+];
+
 
 const pricingData = [
   {
@@ -124,6 +186,17 @@ const pricingData = [
     },
   ];
 
+  const services = [
+    { value: "Grease Trap Cleaning", label: "Grease Trap Cleaning" },
+    { value: "Drain Line Jetting", label: "Drain Line Jetting" },
+    { value: "Sump Pit Cleaning", label: "Sump Pit Cleaning" },
+    { value: "Sewage Water Removing", label: "Sewage Water Removing" },
+    { value: "Lift Station Cleaning", label: "Lift Station Cleaning" },
+    { value: "Grease Trap Supply & Installation", label: "Grease Trap Supply & Installation" },
+    { value: "Kitchen Duct Cleaning", label: "Kitchen Duct Cleaning" },
+    { value: "Water Tank Cleaning", label: "Water Tank Cleaning" },
+  ];
+
   return (
     <div>
       <Navbar />
@@ -136,25 +209,41 @@ const pricingData = [
               <div className="main-head-s2">Excellence</div>
               <div className="main-head-s3">Guaranteed!</div>
             </div>
-            <button className="learn-more-btn">Learn More</button>
+            <button className="learn-more-btn" ><Link href="/Services" style={{textDecoration:"none"}} >Learn More</Link></button>
           </div>
           <div className="slide1right">
-            <Image src={rightImage} alt="Image not found" layout="responsive" />
+            <Image className='slide1RightImg' src={rightImage} alt="Image not found" layout="responsive" />
           </div>
         </div>
 
         <div className="online-appointment">
           <div className="appointment-inputs">
             <span className="appointment-title">Online Appointment</span>
-            <input type="text" placeholder="Your Name" />
-            <input type="number" placeholder="Phone Number" />
-            <select>
-              <option>Service Name</option>
-              <option>Commercial Service</option>
-              <option>Residential Service</option>
-              <option>Industrial Service</option>
-            </select>
-            <input type="submit" value="Submit Now" />
+            <form onSubmit={handleSubmit}>
+              <input type="text"
+              name="name" 
+        placeholder="Your Name" 
+        value={formData.name} 
+        onChange={handleChange} 
+        required/>
+              <input type="number" name="phoneNumber" 
+        placeholder="Phone Number" 
+        value={formData.phoneNumber} 
+        onChange={handleChange} 
+        required/>
+              <select
+              name="selectedService" 
+              value={formData.selectedService} 
+              onChange={handleChange} 
+              required>
+                {
+                  services.map((val,ind)=>{
+                    return <option key={ind} value={val.value}>{val.label}</option>
+                  })
+                }
+              </select>
+              <input type="submit" value="Submit Now" />
+              </form>
           </div>
         </div>
 
@@ -171,12 +260,11 @@ const pricingData = [
             </div>
             <div className="about-subtitle">Our Success Cleaning<br /> Up Your Mess</div>
             <div className="about-description">
-              Can consent to the use of such technologies by closing this notice senectus amet sodales habitant dapibus
-            </div>
+            At clean star tanks, containers & crates cleaning services est, we are dedicated to providing top-quality, reliable cleaning solutions for a diverse range of clients across uae. With years of experience in the industry, we specialize in maintaining and servicing essential infrastructure, from residential and commercial water tanks to industrial sewage treatment facilities.
+           </div>
             <div className="service-outer">
-            {servicesData.slice(0, 2).map((service, index) => (
+            {servicesData.slice(0, 4).map((service, index) => (
               <div className="service" key={index}>
-                <div className="service-icon">{service.icon}</div>
                 <div className="service-title">{service.title}</div>
                 <div className="service-description">{service.description}</div>
               </div>
@@ -186,15 +274,19 @@ const pricingData = [
         </div>
 
         <div className="banner">
-          <Image src={brand1} alt="not found" />
-          <Image src={brand2} alt="not found" />
-          <Image src={brand1} alt="not found" />
-          <Image src={brand2} alt="not found" />
-          <Image src={brand1} alt="not found" />
-          <Image src={brand2} alt="not found" />
-          <Image src={brand1} alt="not found" />
-          <Image src={brand2} alt="not found" />
-        </div>
+  <div className="bannerScroll">
+    <Image src={brand1} alt="not found" />
+    <Image src={brand2} alt="not found" />
+    <Image src={brand1} alt="not found" />
+    <Image src={brand2} alt="not found" />
+    <Image src={brand2} alt="not found" />
+    <Image src={brand2} alt="not found" />
+    <Image src={brand1} alt="not found" />
+    <Image src={brand2} alt="not found" />
+    <Image src={brand1} alt="not found" />
+    <Image src={brand2} alt="not found" />
+  </div>
+</div>
 
         <div className='our-success'>
           <div><span>Our </span> Popular Services</div>
