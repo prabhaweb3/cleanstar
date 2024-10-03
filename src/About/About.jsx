@@ -32,7 +32,7 @@ const About= () => {
         <div className="about-right">
           <div className="about-header">
           <div className="section-title"><span>About </span> our Company</div>
-          <div className="title">Our Success <br /> Cleaning Up your Mess</div>
+          <div className="title" style={{textAlign:'start'}}>Our Success <br /> Cleaning Up your Mess</div>
             <p className="about-description">
             At Clean star tanks, containers & crates cleaning services est, we are dedicated to providing top-quality, reliable cleaning solutions for a diverse range of clients across uae. With years of experience in the industry, we specialize in maintaining and servicing essential infrastructure, from residential and commercial water tanks to.
             </p>
@@ -89,20 +89,28 @@ const Faq = () => {
 
   const faqs = [
     {
-      question: "How many years have you been in business?",
-      answer:
-        "Enim quisque primis praesent cursus convallis pulvinar phasellus adipiscing nullam ullamcorper pretium accumsan.",
+        question: "How many years have you been in business?",
+        answer: "We have been in business for over 10 years, providing reliable cleaning services to our clients.",
     },
     {
-      question: "Do you bring equipment and cleaning supplies?",
-      answer:
-        "Yes, we provide all necessary cleaning supplies and equipment to ensure a spotless cleaning service.",
+        question: "Do you provide your own equipment and cleaning supplies?",
+        answer: "Yes, we bring all the necessary cleaning supplies and equipment to ensure a thorough cleaning service.",
     },
     {
-      question: "What areas do you service?",
-      answer: "We cover a wide range of locations. Contact us for more details about specific regions.",
+        question: "What areas do you serve?",
+        answer: "We serve a wide range of locations. Please contact us for details about specific regions.",
     },
-  ];
+    {
+        question: "What types of cleaning services do you offer?",
+        answer: "We offer various cleaning services, including industrial cleaning, post-construction cleaning, deep cleaning, and specialized services like grease trap cleaning and kitchen duct cleaning.",
+    },
+    {
+        question: "Are your cleaning products environmentally friendly?",
+        answer: "Yes, we prioritize the use of eco-friendly cleaning products to minimize our impact on the environment.",
+    },
+ 
+];
+
 
   return (
     <div className="faq-section">
@@ -214,21 +222,49 @@ const Team = () => {
 
 const feedbackData = [
   {
-    text: "Erat dapibus interdum consequat eleifend. Porttitor iaculis per lectus ornare dolor pede. Metus urna faucibus montes duis conds imentum congue.",
-    author: "Shon Toy",
-    title: "Chief Marketing Officer",
-    img: "service1.jpg", // Add the path for image
-    testimonialImg: "testimonial1.jpg", // Add the path for the client image
+      text: "Erat dapibus interdum consequat eleifend. Porttitor iaculis per lectus ornare dolor pede. Metus urna faucibus montes duis condimentum congue.",
+      author: "Shon Toy",
+      title: "Chief Marketing Officer",
+      img: service1, // Add the path for image
+      testimonialImg: "testimonial1.jpg", // Add the path for the client image
   },
   {
-    text: "A different feedback here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    author: "Jane Doe",
-    title: "Marketing Lead",
-    img: "service2.jpg", // Different image for new author
-    testimonialImg: "testimonial2.jpg", // Different image for new testimonial
+      text: "A different feedback here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      author: "Jane Doe",
+      title: "Marketing Lead",
+      img: service2, // Different image for new author
+      testimonialImg: "testimonial2.jpg", // Different image for new testimonial
   },
-  
+  {
+      text: "The cleaning team did an amazing job! Our office has never looked better. Highly recommend their services for any business looking to maintain a clean and professional environment.",
+      author: "Michael Smith",
+      title: "Operations Manager",
+      img: service3, // Image for this author
+      testimonialImg: "testimonial3.jpg", // Image for this testimonial
+  },
+  {
+      text: "Fantastic service! They arrived on time and exceeded our expectations with their attention to detail. We'll definitely be using them for our future cleaning needs.",
+      author: "Emily Johnson",
+      title: "Facilities Coordinator",
+      img: service4, // Image for this author
+      testimonialImg: "testimonial4.jpg", // Image for this testimonial
+  },
+  {
+      text: "We hired them for a post-construction clean-up, and they did an outstanding job. The crew was professional, efficient, and very thorough.",
+      author: "David Brown",
+      title: "Project Manager",
+      img: service1, // Image for this author
+      testimonialImg: "testimonial5.jpg", // Image for this testimonial
+  },
+  {
+      text: "I was impressed by their commitment to using eco-friendly products. It’s great to find a cleaning service that cares about the environment while delivering excellent results!",
+      author: "Sarah Davis",
+      title: "Business Owner",
+      img: service4, // Image for this author
+      testimonialImg: "testimonial6.jpg", // Image for this testimonial
+  },
 ];
+
 
 function ClientFeedback() {
   // Use state to track the current feedback index
@@ -253,7 +289,7 @@ function ClientFeedback() {
     <div className="client-feedback-container">
       <div className="image-section">
         <Image
-          src={feedback1}
+          src={img}
           alt="Client washing with excitement"
           className="feedback-image"
         />
@@ -269,7 +305,7 @@ function ClientFeedback() {
           {text}
         </p>
         <div className="author-info">
-          <Image src={service1} alt={author} className="author-image" />
+          <Image src={img} alt={author} className="author-image" />
           <div className="author-details">
             <p className="author-name">{author}</p>
             <p className="author-title">{title}</p>
