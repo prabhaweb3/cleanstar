@@ -1,13 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    async rewrites() {
-        return [
-            {
-                source: '/api/:path*',
-                destination: 'https://prabhatech.com/cleanstar_backend/' // Replace with your backend URL
-            }
-        ];
-    }
+    output: 'export',
+    basePath: '/cleanstar',
+    assetPrefix: '/cleanstar',
+    images: {
+        unoptimized: true,  // Disable image optimization for static exports
+    },
 };
 
 export default nextConfig;

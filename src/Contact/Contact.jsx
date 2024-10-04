@@ -74,7 +74,7 @@ const Contact = () => {
             </div>
             <section className={styles.section}>
                 <div className={styles.sectionTitle}><span>Get </span> Free Estimate</div>
-                <div className={styles.title}>If you have any queries, don't hesitate to contact us</div>
+                <div className={styles.title}>If you have any queries, dont hesitate to contact us</div>
                 <div className={styles.mainOuter}>
                     <div className={styles.leftContent}>
                         <ContactInfo

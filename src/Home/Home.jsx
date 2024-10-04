@@ -20,9 +20,10 @@ import Link from 'next/link';
 const HomeScreen = () => {
 
   const [formData, setFormData] = useState({
-    name: '',
-    phoneNumber: '',
-    selectedService: ''
+    fullname: '',
+    email: '',
+    service: '',
+    message: '',
   });
 
   const handleChange = (e) => {
@@ -36,25 +37,32 @@ const HomeScreen = () => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Post the data
+    
+    // Validation check
+    if (!formData.fullname || !formData.email || !formData.service || !formData.message) {
+      alert("Please fill in all fields before submitting.");
+      return;
+    }
+  
     try {
-      const response = await fetch('http://your-api-url.com/endpoint', {
+      const response = await fetch('https://prabhatech.com/cleanstar_backend/appointments/create', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData) // Send form data as JSON
+        body: JSON.stringify(formData),
       });
-
+  
       if (response.ok) {
         const result = await response.json();
         console.log('Form successfully submitted:', result);
+  
         // Optionally, reset form after successful submission
         setFormData({
-          name: '',
-          phoneNumber: '',
-          selectedService: ''
+          fullname: '',
+          email: '',
+          service: '',
+          message: '',
         });
       } else {
         console.error('Error submitting form:', response.statusText);
@@ -63,7 +71,7 @@ const HomeScreen = () => {
       console.error('Error:', error);
     }
   };
-
+  
   const servicesData = [
     {
         title: "Grease Trap Cleaning",
@@ -219,31 +227,52 @@ const pricingData = [
         <div className="online-appointment">
           <div className="appointment-inputs">
             <span className="appointment-title">Online Appointment</span>
-            <form onSubmit={handleSubmit}>
-              <input type="text"
-              name="name" 
-        placeholder="Your Name" 
-        value={formData.name} 
-        onChange={handleChange} 
-        required/>
-              <input type="number" name="phoneNumber" 
-        placeholder="Phone Number" 
-        value={formData.phoneNumber} 
-        onChange={handleChange} 
-        required/>
-              <select
-              name="selectedService" 
-              value={formData.selectedService} 
-              onChange={handleChange} 
-              required>
-                {
-                  services.map((val,ind)=>{
-                    return <option key={ind} value={val.value}>{val.label}</option>
-                  })
-                }
-              </select>
-              <input type="submit" value="Submit Now" />
-              </form>
+            <form className="appointmentForm" onSubmit={handleSubmit}>
+        <input
+          className="input"
+          type="text"
+          name="fullname" // Updated name attribute
+          value={formData.fullname} // Updated state
+          onChange={handleChange}
+          placeholder="Enter Full Name" // Updated placeholder
+        />
+
+        <input
+          className="input"
+          type="email" // Updated input type to email for better validation
+          name="email" // Updated name attribute
+          value={formData.email} // Updated state
+          onChange={handleChange}
+          placeholder="Enter Email" // Updated placeholder
+        />
+     
+        <select
+          className="select"
+          name="service"
+          value={formData.service}
+          onChange={handleChange}
+        >
+          <option value="">Select a Service</option>
+          {services.map((val, ind) => (
+            <option key={ind} value={val.value}>
+              {val.label}
+            </option>
+          ))}
+        </select>
+
+        <input
+          className="textarea"
+          name="message"
+          value={formData.message}
+          onChange={handleChange}
+          placeholder="Enter your message"
+        />
+        
+
+
+        <button className="button" type="submit ">Submit</button>
+          
+      </form>
           </div>
         </div>
 
@@ -260,12 +289,9 @@ const pricingData = [
             </div>
             <div className="about-subtitle">Our Success Cleaning<br /> Up Your Mess</div>
             <div className="about-description">
-<<<<<<< HEAD
+
             At Clean star tanks, containers & crates cleaning services est, we are dedicated to providing top-quality, reliable cleaning solutions for a diverse range of clients across uae. With years of experience in the industry, we specialize in maintaining and servicing essential infrastructure, from residential and commercial water tanks to.</div>
-=======
-            At clean star tanks, containers & crates cleaning services est, we are dedicated to providing top-quality, reliable cleaning solutions for a diverse range of clients across uae. With years of experience in the industry, we specialize in maintaining and servicing essential infrastructure, from residential and commercial water tanks to industrial sewage treatment facilities.
-           </div>
->>>>>>> b4e2475e9299f740f9d6bf5f9c5e4e8cb3bbd39c
+
             <div className="service-outer">
             {servicesData.slice(0, 4).map((service, index) => (
               <div className="service" key={index}>

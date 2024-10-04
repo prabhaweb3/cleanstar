@@ -76,7 +76,7 @@ const AppointmentForm = () => {
     if (Object.keys(validationErrors).length === 0) {
       setLoading(true); // Start loading state
       try {
-        const response = await fetch("https://prabhatech.com/cleanstar_backend/contacts/create", {
+        const response = await fetch("https://prabhatech.com/cleanstar_backend/appointments/create", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(formData),
