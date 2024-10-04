@@ -2,6 +2,7 @@
 import Navbar from '@/Navbar/Navbar';
 import React, { useState, useEffect } from 'react';
 import styles from './Data.module.css'; // Import CSS module
+import { ClientPageRoot } from 'next/dist/client/components/client-page';
 
 const ContactList = () => {
   const [contacts, setContacts] = useState([]);
@@ -66,8 +67,8 @@ const ContactList = () => {
               <th>Phone</th>
               <th>Subject</th>
               <th>Message</th>
+              <th>Date</th>
               <th>Action</th>
-
             </tr>
           </thead>
           <tbody>
@@ -79,6 +80,7 @@ const ContactList = () => {
                 <td>{contact.phone}</td>
                 <td>{contact.subject}</td>
                 <td>{contact.message}</td>
+                <td>{contact.created_at}</td>
                 <td onClick={()=>deleteContact(contact.id)} style={{cursor:"pointer"}}>Delete</td>
               </tr>
             ))}
@@ -151,6 +153,7 @@ const AppointmentList = () => {
               <th>Email</th>
               <th>Service</th>
               <th>Message</th>
+              <th>Date</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -162,6 +165,7 @@ const AppointmentList = () => {
                 <td>{appointment.email}</td>
                 <td>{appointment.service}</td>
                 <td>{appointment.message}</td>
+                <td>{appointment.created_by}</td>
                 <td onClick={()=>deleteAppointment(appointment.id)} style={{cursor:"pointer"}}>Delete</td>
               </tr>
             ))}
